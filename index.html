@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>영악산 수호목</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 15px;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* 이미지 영역 - 실제 이미지는 img 태그의 src에 파일 경로 입력 */
+        .image-container {
+            width: 100%;
+            max-width: 350px;
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border: 1px solid #333;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 이미지가 없을 때 표시되는 플레이스홀더 */
+        .image-placeholder-text {
+            position: absolute;
+            color: #666;
+            font-size: 12px;
+            pointer-events: none;
+        }
+
+        .intro-text {
+            font-size: 14px;
+            color: #cccccc;
+            text-align: center;
+            margin: 10px 0;
+            padding: 0 10px;
+            line-height: 1.6;
+        }
+
+        /* 오디오 플레이어 영역 */
+        .audio-container {
+            width: 100%;
+            max-width: 350px;
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #333;
+        }
+
+        audio {
+            width: 100%;
+            height: 40px;
+            filter: invert(0.8);
+        }
+
+        /* 대화 내용 영역 */
+        .dialogue-container {
+            width: 100%;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 20px 15px;
+            margin-top: 10px;
+        }
+
+        .dialogue {
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 2px solid #333;
+        }
+
+        .dialogue-text {
+            color: #d0d0d0;
+            line-height: 1.6;
+            font-family: 'East Sea Dokdo', cursive;
+            font-size: 24px;
+            letter-spacing: 0.3px;
+            word-break: keep-all;
+        }
+        
+        .silence {
+            color: #444;
+            text-align: center;
+            margin: 15px 0;
+            font-style: italic;
+            font-family: 'East Sea Dokdo', cursive;
+            font-size: 20px;
+        }
+
+        /* 터치 효과 */
+        .dialogue {
+            transition: all 0.2s ease;
+        }
+
+        .dialogue:active {
+            background: rgba(255,255,255,0.02);
+            border-left-color: #666;
+        }
+
+        /* 페이드 인 애니메이션 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container > * {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .container > *:nth-child(1) { animation-delay: 0.1s; }
+        .container > *:nth-child(2) { animation-delay: 0.3s; }
+        .container > *:nth-child(3) { animation-delay: 0.5s; }
+        .container > *:nth-child(4) { animation-delay: 0.7s; }
+
+        /* 가로 모드 대응 */
+        @media screen and (orientation: landscape) {
+            body {
+                padding: 15px 20px;
+            }
+            
+            .container {
+                gap: 15px;
+            }
+            
+            .image-container {
+                max-height: 200px;
+            }
+            
+            .dialogue-container {
+                padding: 15px;
+            }
+        }
+
+        /* 작은 화면 대응 */
+        @media (max-width: 320px) {
+            .dialogue-text {
+                font-size: 22px;
+            }
+            
+            .silence {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 이미지 영역: src="이미지파일명.jpg" 부분에 실제 이미지 파일 경로를 입력하세요 -->
+        <div class="image-container">
+            <img src="rec.jpg" alt="영악산 수호목" onerror="this.style.display='none'">
+            <span class="image-placeholder-text">[이미지를 여기에 추가]</span>
+        </div>
+
+        <!-- 소개 텍스트 -->
+        <p class="intro-text">
+            상자 안에는 녹음기가 들어있습니다. 라혜가 녹음기를 재생했습니다.
+        </p>
+
+        <!-- 오디오 플레이어: src="오디오파일명.mp3" 부분에 실제 오디오 파일 경로를 입력하세요 -->
+        <div class="audio-container">
+            <audio controls>
+                <source src="audio.mp3" type="audio/mpeg">
+                <source src="audio.ogg" type="audio/ogg">
+                <source src="audio.wav" type="audio/wav">
+                오디오를 재생할 수 없습니다.
+            </audio>
+        </div>
+
+        <!-- 대화 내용 -->
+        <div class="dialogue-container">
+            <div class="dialogue">
+                <div class="dialogue-text">"영악산의 나무? 아, 수호목을 말하는 건가?"</div>
+            </div>
+
+            <div class="silence">…………….</div>
+
+            <div class="dialogue">
+                <div class="dialogue-text">
+                    "예전에는 누구나 다 알고 있었는데 말이야. 젊은 사람이면 모를 수도 있겠네.
+                    다들 통 관심이 없으니……. 수호목은 이 마을을 천 년이나 지켜준 영험한 은행나무여.
+                    옛날이야기 중에 그런 이야기도 있었지."
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="dialogue-text">
+                    "악신이 씌인 사람을 그 나무 옆으로 데려가 굿을 했더니 악신이 물러갔다. 뭐 그런 이야기였지 아마? 나도 거의 오십 년 전에 들은 내용이니 정확히 기억은 안 나지만."
+                </div>
+            </div>
+
+            <div class="silence">…………….</div>
+
+            <div class="dialogue">
+                <div class="dialogue-text">
+                    "그렇지. 그 나무 근처에는 악신과 액신이 머물지 못해. 그 나무 근처는 큰 집과 같아.
+                    내부의 영은 서로 자유롭지만 외부의 영이 함부로 침입할 수는 없어. 그래서 영혼과 관련된 의식이나 굿, 제를 치를 때는 그 근처에서 자주 치렀다지 아마? 의식 외부에서 악신이나 액신이 찾아오는 것을 막기 위해서는 최적의 장소이니."
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="dialogue-text">
+                    "그런데 어째서인지 몰라도 가희 어미가 무당이 되고 나서 가희의 어미는 그 장소를 쓰지 않았어. 그 뿐만 아니라 다른 마을 사람들의 출입도 금지했지. 그 장소를 쓸 사람은 따로 있다고 했나? 가희의 어미는 워낙 앞을 잘 내다보았으니 우리가 알지 못하는 큰 뜻이 있던 거겠지."
+                </div>
+            </div>
+
+            <div class="silence">…………….</div>
+
+            <div class="dialogue">
+                <div class="dialogue-text">
+                    "뭐, 가희 어미가 죽은 지금에서는 물어볼 수도 없는 노릇이지만."
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
